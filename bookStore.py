@@ -77,10 +77,16 @@ class BookStore():
     def search_by_author(self, author_name):
         found_books = [book for book in self.inventory if book.author == author_name]
         if not found_books:
-            print(f"No books found by author '{author_name}'.")
+            print(f"-----------------------------------------\n"
+                f"No books found by author '{author_name}'.\n"
+                f"-----------------------------------------"
+                  )
         else:
             for book in found_books:
-                book.show_info()
+                print(f"-----------------------------------------\n"
+                    f"มีหนังสือของผู้แต่งที่ชื่อ {author_name}\nชื่อหนังสือ: {book.title}\n"
+                    f"-----------------------------------------"
+                    )
                 
     def __str__(self):
         return f"ชื่อหนังสือ: {self.title} , จำนวนในสต็อก: {self.in_stock} เล่ม"
@@ -103,6 +109,10 @@ print(customer1)
 store = BookStore() # สร้างร้านหนังสือ
 store.add_book(book1) # เพิ่มหนังสือเล่มที่ 1
 store.add_book(book2) # เพิ่มหนังสือเล่มที่ 2
+
+# ค้นหาหนังสือจากผู้แต่ง
+store.search_by_author("กีกี้")
+
 
 # แสดงผลลัพธ์ของหนังสือในร้าน
 print(f"Book in store now: {store.show_books()}")
