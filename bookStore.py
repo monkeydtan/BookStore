@@ -34,8 +34,8 @@ class Book:
 class Customer:
     def __init__(self,name,budget): # name,budget เป็น parameter ที่รับค่าเข้ามาตอนสร้าง object
         self.name = name # ชื่อ
-        self.budget = budget # งบ (หลังมีการใช้จ่าย)
-        self.initial_bufget = budget # งบ (เริ่มต้น)
+        self.budget = budget # งบที่มี (ตอนจ่าย)
+        self.initial_budget = budget # งบที่มี (หลังมีการใช้จ่าย)
     
     # book => หนังสืออะไร
     # quantity => จำนวนเล่มที่ซื้อ
@@ -45,14 +45,14 @@ class Customer:
         if total_cost > self.budget:
             print(f"ไม่สามารถซื้อได้เนื่องจากจำนวนเงินไม่เพียงพอ")
         else:
-            self.initial_bufget = self.budget-total_cost # self.budget จะเท่ากับ 140 (เพราะหนังสือเล่มละ180 * 2เล่ม=360)
+            self.initial_budget = self.budget-total_cost # self.budget จะเท่ากับ 140 (เพราะหนังสือเล่มละ180 * 2เล่ม=360)
             book.buy(quantity)
             print(f"{self.name} ซื้อ {book.title} จำนวน {quantity} เล่ม\n"
                   f"ยอดรวม : {total_cost} บาท"
                 )
     
     def __str__(self):
-        return f"จ่ายมา {self.budget} เงินคงเหลือ: {self.initial_bufget} บาท"      
+        return f"จ่ายมา {self.budget} เงินคงเหลือ: {self.initial_budget} บาท"      
 
 # ร้านหนังสือ ==> เก็บรวบรวมหนังสือทั้งหมดในร้าน
 class BookStore():
@@ -70,7 +70,7 @@ class BookStore():
             # แสดงจำนวนหนังสือในร้าน
             result = f"มีหนังสือ {len(self.inventory)} เล่ม ในร้าน\n"
             for book in self.inventory:
-                result += str(book) + "\n"
+                 result += f"{book.title} , จำนวนในสต็อก: {book.in_stock} เล่ม\n"
             return result
                       
                 
@@ -86,13 +86,23 @@ class BookStore():
         return f"ชื่อหนังสือ: {self.title} , จำนวนในสต็อก: {self.in_stock} เล่ม"
         
 
+# สร้าง object ของหนังสือ
 book1 = Book("นิยายแฟนตาซี","ตาล",180,20) # สร้าง object จาก class Book เฉยๆ
 book2 = Book("การ์ตูนวิทยาศาสตร์","อิอิ",150,50) # สร้าง object จาก class Book เฉยๆ
-# customer1 = Customer("Johnny",500) # สร้าง object จาก class Customer เฉยๆ
-# customer1.buy_book(book1,2)
-# print(customer1)
 
-store = BookStore()
-store.add_book(book1)
-store.add_book(book2)
+# สร้าง object ของลูกค้า
+customer1 = Customer("Johnny",500) # สร้าง object จาก class Customer เฉยๆ
+
+# ลูกค้าซื้อหนังสือ
+customer1.buy_book(book1,2)
+
+# ผลลัพธ์ของลูกค้าเมื่อทำการซื้อหนังสือ
+print(customer1)
+
+# สร้างร้านและเพิ่มหนังสือ
+store = BookStore() # สร้างร้านหนังสือ
+store.add_book(book1) # เพิ่มหนังสือเล่มที่ 1
+store.add_book(book2) # เพิ่มหนังสือเล่มที่ 2
+
+# แสดงผลลัพธ์ของหนังสือในร้าน
 print(f"Book in store now: {store.show_books()}")

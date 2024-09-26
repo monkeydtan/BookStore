@@ -1,0 +1,1 @@
+result += str(book) + "\n"
