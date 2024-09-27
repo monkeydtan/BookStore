@@ -92,23 +92,27 @@ class BookStore():
         return f"ชื่อหนังสือ: {self.title} , จำนวนในสต็อก: {self.in_stock} เล่ม"
         
 
-# สร้าง object ของหนังสือ
+######## สร้าง object ของหนังสือ ########
 book1 = Book("นิยายแฟนตาซี","ตาล",180,20) # สร้าง object จาก class Book เฉยๆ
 book2 = Book("การ์ตูนวิทยาศาสตร์","อิอิ",150,50) # สร้าง object จาก class Book เฉยๆ
+book3 = Book("หนังสือคำคม","คิดมาก",195,10)
 
-# สร้าง object ของลูกค้า
+######## สร้าง object ของลูกค้า ########
 customer1 = Customer("Johnny",500) # สร้าง object จาก class Customer เฉยๆ
+customer2 = Customer("Jaehyun",1500)
 
-# ลูกค้าซื้อหนังสือ
+# ลูกค้าซื้อหนังสือ 
 customer1.buy_book(book1,2)
+print(customer1) # ผลลัพธ์ของลูกค้าเมื่อทำการซื้อหนังสือ
+customer2.buy_book(book2,3)
+print(customer2) # ผลลัพธ์ของลูกค้าเมื่อทำการซื้อหนังสือ
 
-# ผลลัพธ์ของลูกค้าเมื่อทำการซื้อหนังสือ
-print(customer1)
 
-# สร้างร้านและเพิ่มหนังสือ
-store = BookStore() # สร้างร้านหนังสือ
+######## สร้าง object ร้านหนังสือ ########
+store = BookStore() # สร้างร้านหนังสือ ==> ใส่parameter book เพราะ self. มันเป็นค่าที่ถูกส่งโดยอัตโนมัติเมื่อมีการเรียกใช้งาน method ของ object
 store.add_book(book1) # เพิ่มหนังสือเล่มที่ 1
 store.add_book(book2) # เพิ่มหนังสือเล่มที่ 2
+store.add_book(book3) # เพิ่มหนังสือเล่มที่ 3
 
 # ค้นหาหนังสือจากผู้แต่ง
 store.search_by_author("กีกี้")
